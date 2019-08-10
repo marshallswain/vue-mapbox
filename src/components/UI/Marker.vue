@@ -84,7 +84,8 @@ export default {
       ...this.$props
     };
     if (this.$slots.marker) {
-      markerOptions.element = this.$slots.marker[0].elm;
+      // If the [0] is a vdom element, use the context.$el
+      markerOptions.element = this.$slots.marker[0].elm || this.$slots.marker[0].context.$el;
     }
     this.marker = new this.mapbox.Marker(markerOptions);
 
