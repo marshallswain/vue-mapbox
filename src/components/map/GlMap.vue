@@ -1,7 +1,7 @@
 <template>
   <div class="mgl-map-wrapper">
     <div v-once :id="container" ref="container" />
-    <slot v-if="initialized" />
+    <slot v-if="initialized"></slot>
   </div>
 </template>
 
@@ -101,7 +101,12 @@ export default {
       this.$_registerAsyncActions(map);
       this.$_bindPropsUpdateEvents();
       this.initial = false;
-      this.initialized = true;
+
+      // Setting intialized after a timeout fixes a bug where the template doesn't bind to the change.
+      setTimeout(() => {
+        this.initialized = true;
+      }, 10)
+
       this.$emit("load", { map, component: this });
     });
   },
