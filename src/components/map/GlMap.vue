@@ -82,9 +82,9 @@ export default {
   created() {
     this.map = null;
     this.propsIsUpdating = {};
-    this.mapboxPromise = this.mapboxGl
-      ? Promise.resolve(this.mapboxGl)
-      : import("mapbox-gl");
+    // this.mapboxPromise = this.mapboxGl
+    //   ? Promise.resolve(this.mapboxGl)
+    //   : import("mapbox-gl");
   },
 
   mounted() {

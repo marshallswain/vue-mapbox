@@ -43,18 +43,19 @@ export default {
     },
 
     $_loadMap() {
-      return this.mapboxPromise.then(mapbox => {
-        this.mapbox = mapbox.default ? mapbox.default : mapbox;
-        return new Promise(resolve => {
-          if (this.accessToken) this.mapbox.accessToken = this.accessToken;
-          const map = new this.mapbox.Map({
-            ...this._props,
-            container: this.$refs.container,
-            style: this.mapStyle
-          });
-          map.on("load", () => resolve(map));
+      const mapbox = this.mapboxGl;
+      // return this.mapboxPromise.then(mapbox => {
+      this.mapbox = mapbox.default ? mapbox.default : mapbox;
+      return new Promise(resolve => {
+        if (this.accessToken) this.mapbox.accessToken = this.accessToken;
+        const map = new this.mapbox.Map({
+          ...this._props,
+          container: this.$refs.container,
+          style: this.mapStyle
         });
+        map.on("load", () => resolve(map));
       });
+      // });
     },
 
     $_RTLTextPluginError(error) {
